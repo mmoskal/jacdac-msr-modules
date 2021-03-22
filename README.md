@@ -1,5 +1,7 @@
 # Firmware for MSR prototype Jacdac modules
 
+test
+
 This repository defines configuration for experimental [Jacdac](https://aka.ms/jacdac) modules
 produced by Microsoft Research.
 
