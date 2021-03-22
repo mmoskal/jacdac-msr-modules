@@ -12,3 +12,16 @@ include Makefile.user
 DROP_TARGETS ?= jm-v2.0 jm-v2.0i jm-v2.0p jm-v2.1 jm-temp-humidity-18-1.0A jm-rotary-control-26-1.0A jm-v3.1
 
 include $(JD_STM)/build.mk
+
+check-release:
+	if [ "X`git describe --exact --tags --match 'v[0-9]*' 2>/dev/null`" != "X" ]; then $(MAKE) build-release ; fi
+
+build-release: drop
+	# avoid re-computing FW_VERSION many times
+	$(MAKE) do-build-release FW_VERSION=$(FW_VERSION)
+
+do-build-release:
+	cp built/drop.uf2 dist/fw-$(FW_VERSION).uf2
+	git add dist/fw-$(FW_VERSION).uf2
+	git commit -m "[skip ci] firmware $(FW_VERSION) built"
+	git push

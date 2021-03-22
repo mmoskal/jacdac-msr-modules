@@ -52,9 +52,6 @@ jobs:
       with:
         name: bootloader-update.uf2
         path: built/bootloader-update.uf2
-    - name: Copy dist
-      run: cp built/drop.uf2 dist/firmware.uf2
-    - name: Semantic release
-      run: npx semantic-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: make check-release
+
