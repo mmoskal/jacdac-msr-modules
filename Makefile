@@ -23,5 +23,6 @@ build-release: drop
 do-build-release:
 	cp built/drop.uf2 dist/fw-$(FW_VERSION).uf2
 	git add dist/fw-$(FW_VERSION).uf2
+	if [ "X$$GITHUB_WORKFLOW" != "X" ] ; then git config user.email "<>" && git config user.name "GitHub Bot" ; fi
 	git commit -m "[skip ci] firmware $(FW_VERSION) built"
 	git push
